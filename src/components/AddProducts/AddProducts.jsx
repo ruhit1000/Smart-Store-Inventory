@@ -13,6 +13,7 @@ const AddProducts = ({ handleNewProduct, allProducts }) => {
             return;
         } else {
             handleNewProduct(data)
+            e.target.reset();
         }
     }
 
@@ -23,9 +24,9 @@ const AddProducts = ({ handleNewProduct, allProducts }) => {
             <div className='card bg-base-200 w-full h-75 mt-10 p-3'>
                 <h3 className='font-bold text-xl mb-3'>Add Product</h3>
                 <form onSubmit={handleSubmit} className='space-y-2' action="">
-                    <input name='name' type="text" placeholder="Product Name" class="input" />
-                    <input name='quantity' type="number" placeholder="Quantity" class="input" />
-                    <input name='price' type="number" placeholder="Price" class="input" /> <br />
+                    <input name='name' type="text" placeholder="Product Name" class="input" required/>
+                    <input name='quantity' type="number" placeholder="Quantity" class="input" required/>
+                    <input name='price' type="number" placeholder="Price" class="input" required/> <br />
                     <button type='submit' className='btn btn-primary'>Submit</button>
                 </form>
             </div>
