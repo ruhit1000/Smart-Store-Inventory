@@ -1,10 +1,15 @@
+import { useState } from "react"
 import AddProducts from "./components/AddProducts/AddProducts"
-import MenuBar from "./components/MenuBar/MenuBar"
 import Navbar from "./components/Navbar/Navbar"
 import ShowProducts from "./components/ShowProducts/ShowProducts"
 
 
 function App() {
+  const [allProducts, setAllProducts] = useState([]);
+  const handleNewProduct = (data) => {
+    const newProducts = [...allProducts, data]
+    setAllProducts(newProducts)
+  }
 
 
   return (
@@ -12,15 +17,10 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main className="grid grid-cols-5">
-        <div>
-          <MenuBar />
-        </div>
-        <div>
-          <AddProducts />
-        </div>
-        <div className="col-span-3">
-          <ShowProducts />
+      <main className="grid md:grid-cols-4">
+        <AddProducts handleNewProduct={handleNewProduct} allProducts={allProducts}/>
+        <div className="md:col-span-3">
+          <ShowProducts allProducts={allProducts} />
         </div>
       </main>
     </div>
