@@ -6,9 +6,20 @@ import ShowProducts from "./components/ShowProducts/ShowProducts"
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
+  
   const handleNewProduct = (data) => {
     const newProducts = [...allProducts, data]
     setAllProducts(newProducts)
+  }
+
+  const handleDelete = (productName) => {
+    const updatedProducts = allProducts.filter(product => product.name !== productName)
+    setAllProducts(updatedProducts)
+  }
+
+  const productsQuantityUpdate = (updatedQuantity, productName) => {
+    const updatedProducts = allProducts.map((product) => product.name === productName? {...product, quantity: updatedQuantity} : product)
+    setAllProducts(updatedProducts)
   }
 
 
@@ -20,7 +31,7 @@ function App() {
       <main className="grid md:grid-cols-4">
         <AddProducts handleNewProduct={handleNewProduct} allProducts={allProducts}/>
         <div className="md:col-span-3">
-          <ShowProducts allProducts={allProducts} />
+          <ShowProducts handleDelete={handleDelete} allProducts={allProducts} productsQuantityUpdate={productsQuantityUpdate} />
         </div>
       </main>
     </div>

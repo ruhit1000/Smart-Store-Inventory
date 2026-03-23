@@ -6,13 +6,22 @@ const AddProducts = ({ handleNewProduct, allProducts }) => {
 
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries())
+        if (data.name.trim() === '') {
+            alert('Please insert a product name')
+            return;
+        }
         
         const existingProduct = allProducts.find((product) => product.name.toLowerCase().trim().replaceAll(' ', '') === data.name.toLowerCase().trim().replaceAll(' ', ''))
         if (existingProduct) {
             alert('Product Already Exists');
             return;
         } else {
-            handleNewProduct(data)
+            const newProduct = {
+                name: data.name,
+                price: parseInt(data.price),
+                quantity: parseInt(data.quantity)
+            }
+            handleNewProduct(newProduct)
             e.target.reset();
         }
     }
